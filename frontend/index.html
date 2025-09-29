@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Restaurant Menu Manager</h1>
+
+    <div class="card">
+        <h2>Add Menu Item</h2>
+        <form id="menuForm">
+            <label for="restaurant_id">Restaurant ID</label>
+            <input type="number" id="restaurant_id" name="restaurant_id" required>
+
+            <label for="food">Food Name</label>
+            <input type="text" id="food" name="food" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="image">Image URL</label>
+            <input type="url" id="image" name="image">
+
+            <button type="submit">Add Item</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Fetch Menu Items</h2>
+        <form id="fetchForm">
+            <label for="fetch_restaurant_id">Restaurant ID</label>
+            <input type="number" id="fetch_restaurant_id" name="fetch_restaurant_id" required>
+            <button type="submit">Fetch Items</button>
+        </form>
+        <div id="menuList" class="menu-list"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
