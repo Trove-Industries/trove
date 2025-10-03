@@ -4,7 +4,7 @@ use sqlx::FromRow;
 #[derive(Serialize, Debug, Deserialize, FromRow)]
 pub struct MenuItem {
     pub id: i32,
-    pub restaurant_id: String,
+    pub restaurant_name: String,
     pub food: String,
     pub description: Option<String>, // Nullable in DB
     pub price: Option<i32>,          // Nullable in DB
@@ -13,7 +13,7 @@ pub struct MenuItem {
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct NewMenuItem {
-    pub restaurant_id: String,
+    pub restaurant_name: String,
     pub food: String,
     pub description: Option<String>,
     pub price: Option<i32>,
@@ -26,4 +26,9 @@ pub struct UpdateMenuItem {
     pub description: Option<String>,
     pub price: Option<i32>,
     pub image: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize, FromRow)]
+pub struct RestaurantName{
+    pub restaurant_name: String,
 }

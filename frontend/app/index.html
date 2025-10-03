@@ -1,72 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trove Industries</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Console</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- Navigation -->
-<header class="navbar">
-    <div class="logo">Trove<span>Industries</span></div>
-    <nav>
-        <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="https://app.troveindustries.dev">Login</a></li>
-        </ul>
-    </nav>
-</header>
-
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Build Your Restaurant Website in Minutes</h1>
-        <p>Create menus, take reservations, and showcase your brand — all powered by Trove.</p>
-        <a href="https://app.troveindustries.dev" class="btn-primary">Get Started</a>
-    </div>
-</section>
-
-<!-- Features -->
-<section id="features" class="features">
-    <h2>Why Choose Trove?</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>AI-Powered Setup</h3>
-            <p>Auto-generate your menu and website in seconds.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Mobile Friendly</h3>
-            <p>Your site looks great on any device — no extra work needed.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Fast & Secure</h3>
-            <p>Built on modern infrastructure with top-notch security.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Pricing -->
-<section id="pricing" class="pricing">
-    <h2>Simple Pricing</h2>
-    <div class="pricing-card">
-        <h3>Starter</h3>
-        <p>$10 / month</p>
-        <ul>
-            <li>1 Restaurant Website</li>
-            <li>Unlimited Menu Items</li>
-            <li>Email Support</li>
-        </ul>
-        <a href="https://app.troveindustries.dev" class="btn-primary">Start Free Trial</a>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer>
-    <p>© 2025 Trove Industries. All rights reserved.</p>
-</footer>
-
+<div class="container">
+    <h1>Welcome to Restaurant Console</h1>
+    <p>Enter your restaurant name to continue</p>
+    <form id="loginForm">
+        <input type="text" id="restaurantName" placeholder="Restaurant Name" required>
+        <button type="submit">Get Started</button>
+    </form>
+    <p id="errorMsg" class="error"></p>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
