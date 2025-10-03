@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-<div class="sidebar">
-    <h2 id="restaurantTitle"></h2>
-    <a href="dashboard.html">Home</a>
-    <a href="add-menu.html">➕ Add New Menu Item</a>
-    <a href="view-menus.html">📋 Manage Menu Items</a>
+<h1>Dashboard</h1>
+<div class="card">
+    <a href="add-menu.html"><button>Add Menu Item</button></a>
+    <a href="view-menus.html"><button>View Menus</button></a>
 </div>
-<div class="content">
-    <h1>Dashboard</h1>
-    <p>Welcome to your restaurant dashboard.</p>
-</div>
-<script src="js/script.js"></script>
+
+<script type="module" src="./js/dashboard.js"></script>
 </body>
 </html>

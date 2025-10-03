@@ -1,37 +1,39 @@
-import { registerRestaurant, validateRestaurant } from "./api.js";
+import { apiRequest } from "./api.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Tab switching
-    window.showTab = (tab) => {
-        document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-        document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
-        document.getElementById(tab).classList.add("active");
-        document.querySelector(`.tab-btn[onclick="showTab('${tab}')"]`).classList.add("active");
+// Register
+async function registerRestaurant(event) {
+    event.preventDefault();
+    const data = {
+        restaurant_name: document.getElementById("restaurantName").value,
+        country: document.getElementById("country").value,
+        city: document.getElementById("city").value,
     };
+    try {
+        await apiRequest("/register-restaurant", "POST", data);
+        alert("Registered successfully!");
+        window.location.href = "login.html";
+    } catch (err) {
+        alert("Error: " + err.message);
+    }
+}
 
-    // Register form
-    document.getElementById("registerForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const data = {
-            restaurant_name: document.getElementById("restaurant_name").value,
-            country: document.getElementById("country").value,
-            city: document.getElementById("city").value,
-        };
-        const res = await registerRestaurant(data);
-        alert("Registered successfully! Now login.");
-        showTab("login");
-    });
-
-    // Login form
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const name = document.getElementById("login_restaurant").value;
-        const res = await validateRestaurant(name);
+// Login
+async function loginRestaurant(event) {
+    event.preventDefault();
+    const restaurantName = document.getElementById("restaurantName").value;
+    try {
+        const res = await apiRequest(`/validate/${restaurantName}`, "GET");
         if (res.length > 0) {
-            localStorage.setItem("restaurantName", name); // save session
+            localStorage.setItem("restaurantName", restaurantName);
             window.location.href = "dashboard.html";
         } else {
-            alert("Restaurant not found. Please register.");
+            alert("Restaurant not found.");
         }
-    });
-});
+    } catch (err) {
+        alert("Error: " + err.message);
+    }
+}
+
+// Attach event listeners
+document.getElementById("registerForm")?.addEventListener("submit", registerRestaurant);
+document.getElementById("loginForm")?.addEventListener("submit", loginRestaurant);
