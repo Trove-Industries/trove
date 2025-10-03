@@ -42,6 +42,9 @@ async fn main() -> anyhow::Result<()> {
         .allow_headers([http::header::CONTENT_TYPE])
         .allow_origin(AllowOrigin::list(origins));
 
+    tracing::info!("Allowed origins: {:?}", cfg.allowed_origin);
+
+
     let app = routes::menu_router::menu_routes()
         .with_state(pool)
         .layer(cors);
