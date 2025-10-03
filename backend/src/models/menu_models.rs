@@ -4,7 +4,6 @@ use sqlx::FromRow;
 #[derive(Serialize, Debug, Deserialize, FromRow)]
 pub struct MenuItem {
     pub id: i32,
-    pub restaurant_name: String,
     pub food: String,
     pub description: Option<String>, // Nullable in DB
     pub price: Option<i32>,          // Nullable in DB

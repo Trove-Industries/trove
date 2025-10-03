@@ -3,19 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Console</title>
+    <title>Restaurant App | Login & Register</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="container">
-    <h1>Welcome to Restaurant Console</h1>
-    <p>Enter your restaurant name to continue</p>
-    <form id="loginForm">
-        <input type="text" id="restaurantName" placeholder="Restaurant Name" required>
-        <button type="submit">Get Started</button>
-    </form>
-    <p id="errorMsg" class="error"></p>
+    <h1>Restaurant Portal</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('login')">Login</button>
+        <button class="tab-btn" onclick="showTab('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login" class="tab-content active">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="login_restaurant">Restaurant Name</label>
+            <input type="text" id="login_restaurant" name="login_restaurant" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register" class="tab-content">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="restaurant_name">Restaurant Name</label>
+            <input type="text" id="restaurant_name" name="restaurant_name" required>
+
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
 </div>
-<script src="script.js"></script>
+
+<script src="js/auth.js"></script>
 </body>
 </html>

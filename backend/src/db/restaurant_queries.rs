@@ -1,5 +1,29 @@
 use sqlx::{Error, PgPool};
-use crate::models::restaurant_models::RestaurantName;
+use crate::models::restaurant_models::{NewRestaurant, Restaurant, RestaurantName};
+
+
+pub async fn register_restaurant(
+    pool: &PgPool,
+    new_restaurant: NewRestaurant,
+) ->Result<Restaurant, Error> {
+
+    let restaurant = sqlx::query_as::<_,Restaurant>(
+        r#"
+                INSERT INTO restaurants (restaurant_name, country, city)
+                VALUES ($1, $2, $3)
+                RETURNING id, restaurant_name, country, city
+            "#
+    )
+
+        .bind(new_restaurant.restaurant_name)
+        .bind(new_restaurant.country)
+        .bind(new_restaurant.city)
+        .persistent(false)
+        .fetch_one(pool)
+        .await?;
+
+    Ok(restaurant)
+}
 
 pub async fn validate_restaurant(
     pool: &PgPool,
@@ -8,7 +32,7 @@ pub async fn validate_restaurant(
     let name = sqlx::query_as::<_, RestaurantName>(
         r#"
                 SELECT DISTINCT restaurant_name
-                FROM menu_items
+                FROM restaurants
                 WHERE restaurant_name ILIKE $1
             "#
     )
@@ -19,3 +43,4 @@ pub async fn validate_restaurant(
 
     Ok(name)
 }
+
