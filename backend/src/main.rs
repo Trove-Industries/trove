@@ -6,7 +6,7 @@ use crate::config::config::load_config;
 
 use axum::{http, Router};
 use tokio::net::TcpListener;
-use tower_http::cors::{CorsLayer};
+use tower_http::cors::{AllowOrigin, CorsLayer};
 use tracing_subscriber::fmt::format;
 
 mod config;
@@ -38,9 +38,9 @@ async fn main() -> anyhow::Result<()> {
         .collect::<Result<Vec<_>, _>>()?;
 
     let cors = CorsLayer::new()
-        .allow_methods([Method::GET, Method::POST])
+        .allow_methods([Method::GET, Method::POST, Method::OPTIONS])
         .allow_headers([http::header::CONTENT_TYPE])
-        .allow_origin(origins);
+        .allow_origin(AllowOrigin::list(origins));
 
     let app = routes::menu_router::menu_routes()
         .with_state(pool)
