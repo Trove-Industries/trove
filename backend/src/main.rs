@@ -1,11 +1,12 @@
 use anyhow::{Context};
+use axum::handler::Handler;
 use axum::http::{HeaderValue, Method};
 use crate::db::connection::connection_pool;
 use crate::config::config::load_config;
 
-use axum::Router;
+use axum::{http, Router};
 use tokio::net::TcpListener;
-use tower_http::cors::CorsLayer;
+use tower_http::cors::{CorsLayer};
 use tracing_subscriber::fmt::format;
 
 mod config;
@@ -27,13 +28,19 @@ async fn main() -> anyhow::Result<()> {
         .context("Failed to connect")?;
     println!("Connection Successful");
 
-    let allowed_origin = HeaderValue::from_str(&cfg.allowed_origin)
-        .context("ALLOWED ORIGIN format incorrect")?;
+    let origins: Vec<HeaderValue> = cfg.allowed_origin
+        .split(',')
+        .map(|s|
+            s.trim()
+                .parse::<HeaderValue>()
+                .with_context(|| format!("Invalid cors origin {}",s))
+        )
+        .collect::<Result<Vec<_>, _>>()?;
 
     let cors = CorsLayer::new()
-        .allow_origin(allowed_origin)
-        .allow_methods([Method::GET,Method::POST])
-        .allow_headers([axum::http::header::CONTENT_TYPE]);
+        .allow_methods([Method::GET, Method::POST])
+        .allow_headers([http::header::CONTENT_TYPE])
+        .allow_origin(origins);
 
     let app = routes::menu_router::menu_routes()
         .with_state(pool)
@@ -43,7 +50,7 @@ async fn main() -> anyhow::Result<()> {
         .unwrap_or_else(|_| "8000".to_string())
         .parse::<u16>()
         .context("Port not set correctly")?;
-    
+
     let addr = format!("0.0.0.0:{}", port);
     let listener = TcpListener::bind(&addr).await?;
     tracing::info!("Server running on http://{}", addr);

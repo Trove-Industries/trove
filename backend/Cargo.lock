@@ -128,6 +128,7 @@ dependencies = [
  "anyhow",
  "axum",
  "dotenvy",
+ "http",
  "rust_decimal",
  "serde",
  "sqlx",
