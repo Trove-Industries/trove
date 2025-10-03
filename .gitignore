@@ -1,3 +1,20 @@
-/target
+# Rust build outputs
+/backend/target/
 
+# IDE / Editor files
+/.idea/
+/*.iml
+/.vscode/
+
+# Pgbouncer credentials
+/backend/src/pgbouncer/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
 .env
