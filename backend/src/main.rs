@@ -1,4 +1,4 @@
-use anyhow::Context;
+use anyhow::{Context};
 use axum::http::{HeaderValue, Method};
 use crate::db::connection::connection_pool;
 use crate::config::config::load_config;
@@ -6,6 +6,7 @@ use crate::config::config::load_config;
 use axum::Router;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
+use tracing_subscriber::fmt::format;
 
 mod config;
 mod db;
@@ -21,7 +22,9 @@ async fn main() -> anyhow::Result<()> {
 
     let cfg = load_config()?;
 
-    let pool = connection_pool(&cfg.database_url).await?;
+    let pool = connection_pool(&cfg.database_url)
+        .await
+        .context("Failed to connect")?;
     println!("Connection Successful");
 
     let allowed_origin = HeaderValue::from_str(&cfg.allowed_origin)
@@ -36,9 +39,14 @@ async fn main() -> anyhow::Result<()> {
         .with_state(pool)
         .layer(cors);
 
-    let addr = "127.0.0.1:3000";
-    let listener = TcpListener::bind(addr).await?;
-    tracing::info!("🚀 Server running on http://{}", addr);
+    let port: u16 = std::env::var("PORT")
+        .unwrap_or_else(|_| "8000".to_string())
+        .parse::<u16>()
+        .context("Port not set correctly")?;
+    
+    let addr = format!("0.0.0.0:{}", port);
+    let listener = TcpListener::bind(&addr).await?;
+    tracing::info!("Server running on http://{}", addr);
 
     axum::serve(listener, app).await?;
 
