@@ -45,7 +45,9 @@ async fn main() -> anyhow::Result<()> {
     tracing::info!("Allowed origins: {:?}", cfg.allowed_origin);
 
 
-    let app = routes::menu_router::menu_routes()
+    let app = Router::new()
+        .nest("/menu", routes::menu_router::menu_routes())
+        .nest("/restaurant", routes::restaurant_router::restaurant_routes())
         .with_state(pool)
         .layer(cors);
 

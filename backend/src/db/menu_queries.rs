@@ -1,5 +1,6 @@
-use sqlx::{Error, PgPool, FromRow, Execute};
-use crate::models::menu_item::{MenuItem, NewMenuItem, RestaurantName};
+use sqlx::{Error, PgPool};
+use crate::models::menu_models::{MenuItem, NewMenuItem};
+
 
 pub async fn insert_menu(
     pool: &PgPool,
@@ -45,21 +46,3 @@ pub async fn get_menu_by_restaurant(
     Ok(menu)
 }
 
-pub async fn validate_restaurant(
-    pool: &PgPool,
-    restaurant_name: String,
-) ->Result<Vec<RestaurantName>, Error> {
-    let name = sqlx::query_as::<_, RestaurantName>(
-        r#"
-                SELECT DISTINCT restaurant_name
-                FROM menu_items
-                WHERE restaurant_name ILIKE $1
-            "#
-    )
-        .bind(restaurant_name)
-        .persistent(false)
-        .fetch_all(pool)
-        .await?;
-
-    Ok(name)
-}

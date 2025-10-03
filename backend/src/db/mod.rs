@@ -1,2 +1,3 @@
 pub(crate) mod connection;
-pub mod menu_queries;
+pub(crate) mod menu_queries;
+pub(crate) mod restaurant_queries;

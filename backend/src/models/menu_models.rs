@@ -28,7 +28,3 @@ pub struct UpdateMenuItem {
     pub image: Option<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize, FromRow)]
-pub struct RestaurantName{
-    pub restaurant_name: String,
-}

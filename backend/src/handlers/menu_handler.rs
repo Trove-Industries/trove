@@ -1,6 +1,6 @@
 use axum::{extract::{Path,State}, Json};
 use sqlx::PgPool;
-use crate::models::menu_item::{MenuItem, NewMenuItem, RestaurantName};
+use crate::models::menu_models::{MenuItem, NewMenuItem};
 use crate::services::menu_service;
 
 pub async fn create_menu(
@@ -23,13 +23,4 @@ pub async fn get_menu(
     Ok(Json(menu))
 }
 
-pub async fn validate_restaurant(
-    State(pool): State<PgPool>,
-    Path(restaurant_name): Path<String>
-) ->Result<Json<Vec<RestaurantName>>, (axum::http::StatusCode,String)>{
-    let name = menu_service::validate_restaurant(&pool, restaurant_name)
-        .await
-        .map_err(|e| (axum::http::StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
-    Ok(Json(name))
-}
 
