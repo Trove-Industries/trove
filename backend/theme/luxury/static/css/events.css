@@ -1,0 +1,103 @@
+/* Luxury Theme - Events Page */
+
+body {
+    margin:0;
+    font-family:'Roboto', sans-serif;
+    background:#fff8f2;
+    color:#333;
+}
+
+a { text-decoration:none; color:inherit; }
+
+/* Navbar */
+nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 3rem;
+    background:rgba(255,248,242,0.95);
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+nav .logo {
+    font-family:'Playfair Display', serif;
+    font-size:1.8rem;
+    color:#b88b4a;
+}
+nav ul { display:flex; gap:2rem; list-style:none; }
+nav ul li a:hover { color:#b88b4a; }
+
+/* Hero */
+.hero {
+    position:relative;
+    text-align:center;
+    color:#fff;
+    padding:6rem 2rem;
+    background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+}
+.hero::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.4);}
+.hero-content { position:relative; z-index:1; max-width:800px; margin:0 auto;}
+.hero h1 { font-family:'Playfair Display', serif; font-size:3rem; margin-bottom:1rem; }
+.hero p { font-size:1.2rem; }
+
+/* Events Grid */
+.events {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+    padding:4rem 3rem;
+}
+.event-card {
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    transition:transform 0.3s, box-shadow 0.3s;
+}
+.event-card img {
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.3s;
+}
+.event-card:hover img { transform:scale(1.05); }
+.event-card .info { padding:1rem; background:#fff; }
+.event-card .info h4 { font-family:'Playfair Display', serif; color:#b88b4a; margin-bottom:0.5rem; }
+.event-card .info p { font-size:0.9rem; color:#555; margin-bottom:0.3rem; }
+.event-card .info span { font-size:0.85rem; color:#999; }
+
+/* Modal */
+.modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:20;
+}
+.modal-content {
+    background:#fff;
+    border-radius:12px;
+    padding:2rem;
+    max-width:600px;
+    width:90%;
+    position:relative;
+    text-align:left;
+}
+.modal-content h3 { font-family:'Playfair Display', serif; color:#b88b4a; margin-bottom:1rem; }
+.modal-content p { margin-bottom:1rem; }
+.modal-content .close { position:absolute; top:1rem; right:1rem; font-size:1.5rem; cursor:pointer; color:#b88b4a; }
+
+/* Footer */
+footer { background:#f7f2ec; text-align:center; padding:2rem 1rem; font-size:0.9rem; color:#777; }
+
+/* Responsive */
+@media(max-width:768px){
+    .hero h1{font-size:2.2rem;}
+    .hero p{font-size:1rem;}
+}

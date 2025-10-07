@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Fun Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/backend/themeenu.css">
+    <link rel="stylesheet" href="/backend/themeenu.css">
+</head>
+<body>
+
+<!-- Hero -->
+<section class="menu-hero">
+    <h1>Our Fun & Tasty Menu</h1>
+    <p>Bold flavors. Exciting dishes. Something for everyone!</p>
+</section>
+
+<!-- Categories -->
+<div class="menu-categories">
+    <button class="active" data-category="all">All</button>
+    <button data-category="breakfast">Breakfast</button>
+    <button data-category="main-course">Main Course</button>
+    <button data-category="beverages">Beverages</button>
+    <button data-category="desserts">Desserts</button>
+</div>
+
+<!-- Menu Items -->
+<div class="menu-items">
+    <div class="menu-card" data-category="breakfast" onclick="openModal('dish1')">
+        <img src="https://images.unsplash.com/photo-1604908177521-0f8a6a1f8c7c?auto=format&fit=crop&w=800&q=80" alt="Pancakes">
+        <div class="info">
+            <h4>Fluffy Pancakes</h4>
+            <p>Served with fresh berries and syrup</p>
+        </div>
+    </div>
+
+    <div class="menu-card" data-category="main-course" onclick="openModal('dish2')">
+        <img src="https://images.unsplash.com/photo-1601050690194-cde3f0f7e0b8?auto=format&fit=crop&w=800&q=80" alt="Burger">
+        <div class="info">
+            <h4>Cheesy Burger</h4>
+            <p>Juicy beef with melted cheddar</p>
+        </div>
+    </div>
+</div>
+
+<!-- Dish Modals -->
+<div id="dish1" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('dish1')">&times;</span>
+        <h3>Fluffy Pancakes</h3>
+        <p>Our pancakes are made fresh daily, served with seasonal berries and maple syrup. Perfect for a fun breakfast!</p>
+    </div>
+</div>
+
+<div id="dish2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('dish2')">&times;</span>
+        <h3>Cheesy Burger</h3>
+        <p>Juicy 100% beef patty topped with cheddar, lettuce, tomato, and our special sauce. Served with crispy fries.</p>
+    </div>
+</div>
+
+<script src="/backend/themein.js"></script>
+<script src="/backend/themenu.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.restaurant_name }} | Menu</title>
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <script defer src="/static/js/menu.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1 class="restaurant-name">{{ restaurant.restaurant_name }}</h1>
+        <p class="restaurant-location">{{ restaurant.city }}, {{ restaurant.country }}</p>
+    </header>
+
+    <main class="menu-container">
+        {% if menu_items | length > 0 %}
+            <div class="menu-grid">
+                {% for item in menu_items %}
+                    <div class="menu-card">
+                        {% if item.image %}
+                            <img src="{{ item.image }}" alt="{{ item.food }}" class="menu-image">
+                        {% else %}
+                            <div class="menu-image placeholder">No Image</div>
+                        {% endif %}
+                        <div class="menu-content">
+                            <h2 class="menu-title">{{ item.food }}</h2>
+                            <p class="menu-description">{{ item.description | default(value="No description available") }}</p>
+                            <p class="menu-price">${{ item.price }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-message">No menu items available.</p>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; {{ restaurant.restaurant_name }} — All rights reserved</p>
+    </footer>
+</body>
+</html>

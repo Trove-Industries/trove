@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant_name }} - Contact</title>
+    <link rel="stylesheet" href="/backend/themease.css">
+    <link rel="stylesheet" href="/backend/themeontact.css">
+</head>
+<body>
+<nav>
+    <div class="container">
+        <div class="logo">{{ restaurant_name }}</div>
+        <ul>
+            <li><a href="/backend/theme/dev/static">Home</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="card">
+                <h2>Get in Touch</h2>
+                <form id="contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Message" rows="5" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+            <div class="card">
+                <h2>Contact Information</h2>
+                <div id="contact-info">
+                    <p><strong>Address:</strong> {{ address }}</p>
+                    <p><strong>Phone:</strong> {{ phone }}</p>
+                    <p><strong>Email:</strong> {{ email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 {{ restaurant_name }}. All rights reserved.</p>
+</footer>
+
+<script src="/backend/themein.js"></script>
+<script src="/backend/thementact.js"></script>
+</body>
+</html>

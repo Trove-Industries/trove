@@ -9,8 +9,8 @@ pub async fn register_restaurant(
 
     let restaurant = sqlx::query_as::<_,Restaurant>(
         r#"
-                INSERT INTO restaurants (restaurant_name, country, city)
-                VALUES ($1, $2, $3)
+                INSERT INTO restaurants (restaurant_name, country, city, subdomain)
+                VALUES ($1, $2, $3, $4)
                 RETURNING id, restaurant_name, country, city
             "#
     )
@@ -18,6 +18,7 @@ pub async fn register_restaurant(
         .bind(new_restaurant.restaurant_name)
         .bind(new_restaurant.country)
         .bind(new_restaurant.city)
+        .bind(new_restaurant.subdomain)
         .persistent(false)
         .fetch_one(pool)
         .await?;

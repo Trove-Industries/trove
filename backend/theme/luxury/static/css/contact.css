@@ -1,0 +1,90 @@
+/* Luxury Theme - Contact Page */
+
+body {
+    margin:0;
+    font-family:'Roboto', sans-serif;
+    background:#fff8f2;
+    color:#333;
+}
+
+a { text-decoration:none; color:inherit; }
+
+/* Navbar */
+nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 3rem;
+    background:rgba(255,248,242,0.95);
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+nav .logo {
+    font-family:'Playfair Display', serif;
+    font-size:1.8rem;
+    color:#b88b4a;
+}
+nav ul { display:flex; gap:2rem; list-style:none; }
+nav ul li a:hover { color:#b88b4a; }
+
+/* Hero */
+.hero {
+    position:relative;
+    text-align:center;
+    color:#fff;
+    padding:6rem 2rem;
+    background:url('https://images.unsplash.com/photo-1555992336-c65a2a82f5ee?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+}
+.hero::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.4);}
+.hero-content { position:relative; z-index:1; max-width:800px; margin:0 auto;}
+.hero h1 { font-family:'Playfair Display', serif; font-size:3rem; margin-bottom:1rem; }
+.hero p { font-size:1.2rem; }
+
+/* Contact Section */
+.contact { display:flex; flex-wrap:wrap; gap:2rem; padding:4rem 3rem; }
+.contact-form { flex:1 1 400px; }
+.contact-form form { display:flex; flex-direction:column; gap:1rem; }
+.contact-form input, .contact-form textarea {
+    padding:0.8rem 1rem;
+    font-size:1rem;
+    border:1px solid #d6c6b0;
+    border-radius:6px;
+    outline:none;
+    transition:border 0.3s, box-shadow 0.3s;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color:#b88b4a; box-shadow:0 0 8px rgba(184,139,74,0.4); }
+.contact-form button {
+    padding:0.8rem 2rem;
+    font-size:1rem;
+    font-weight:500;
+    color:#fff;
+    background:#b88b4a;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    transition:background 0.3s;
+}
+.contact-form button:hover { background:#a0773e; }
+
+.contact-details { flex:1 1 300px; display:flex; flex-direction:column; gap:1rem; font-size:0.95rem; }
+.contact-details h3 { font-family:'Playfair Display', serif; font-size:1.5rem; color:#b88b4a; margin-bottom:0.5rem; }
+
+/* Map */
+.map { margin-top:2rem; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+
+/* CTA */
+.cta { text-align:center; padding:3rem; }
+.cta button { padding:0.8rem 2rem; font-size:1rem; font-weight:500; color:#fff; background:#b88b4a; border:none; border-radius:5px; cursor:pointer; transition:background 0.3s; }
+.cta button:hover { background:#a0773e; }
+
+/* Footer */
+footer { background:#f7f2ec; text-align:center; padding:2rem 1rem; font-size:0.9rem; color:#777; }
+
+/* Responsive */
+@media(max-width:768px){
+    .hero h1{font-size:2.2rem;}
+    .hero p{font-size:1rem;}
+    .contact{flex-direction:column;}
+}

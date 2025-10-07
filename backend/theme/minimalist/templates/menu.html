@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Minimalist Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/backend/themease.css">
+    <link rel="stylesheet" href="/backend/themeenu.css">
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="menu-hero">
+    <h1>Our Menu</h1>
+    <p>Delight in our carefully curated dishes, crafted to perfection.</p>
+</section>
+
+<!-- Categories -->
+<div class="menu-categories">
+    <button class="category-btn active" data-cat="cat1" onclick="showCategory('cat1')">Breakfast</button>
+    <button class="category-btn" data-cat="cat2" onclick="showCategory('cat2')">Main Course</button>
+    <button class="category-btn" data-cat="cat3" onclick="showCategory('cat3')">Desserts</button>
+</div>
+
+<!-- Dish Grids -->
+<div id="cat1" class="dish-grid">
+    <div class="dish-card" onclick="openDishModal('dish1')">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=80" alt="Pancakes">
+        <div class="info">
+            <h4>Classic Pancakes</h4>
+            <p>Fluffy pancakes with maple syrup and fresh fruits.</p>
+        </div>
+    </div>
+</div>
+
+<div id="cat2" class="dish-grid" style="display:none;">
+    <div class="dish-card" onclick="openDishModal('dish2')">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80" alt="Steak">
+        <div class="info">
+            <h4>Grilled Steak</h4>
+            <p>Perfectly cooked steak with herb butter and sides.</p>
+        </div>
+    </div>
+</div>
+
+<div id="cat3" class="dish-grid" style="display:none;">
+    <div class="dish-card" onclick="openDishModal('dish3')">
+        <img src="https://images.unsplash.com/photo-1599785209707-f9d7db2183fa?auto=format&fit=crop&w=800&q=80" alt="Chocolate Cake">
+        <div class="info">
+            <h4>Chocolate Cake</h4>
+            <p>Rich chocolate cake with creamy frosting and berries.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Dish Modals -->
+<div id="dish1" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDishModal('dish1')">&times;</span>
+        <h3>Classic Pancakes</h3>
+        <p>Fluffy pancakes made with fresh ingredients, topped with maple syrup and seasonal fruits.</p>
+    </div>
+</div>
+
+<div id="dish2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDishModal('dish2')">&times;</span>
+        <h3>Grilled Steak</h3>
+        <p>Juicy grilled steak cooked to perfection, served with herb butter and your choice of sides.</p>
+    </div>
+</div>
+
+<div id="dish3" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDishModal('dish3')">&times;</span>
+        <h3>Chocolate Cake</h3>
+        <p>Rich chocolate cake layered with creamy frosting, finished with fresh berries.</p>
+    </div>
+</div>
+
+<script src="/backend/themein.js"></script>
+<script src="/backend/themenu.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+/* Luxury Theme - Home Page */
+
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Roboto', sans-serif; background: #fff8f2; color: #333; }
+a { text-decoration: none; color: inherit; }
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(255,248,242,0.95);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+nav .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #b88b4a; }
+nav ul { display: flex; gap: 2rem; list-style: none; }
+nav ul li a { font-weight: 500; transition: color 0.3s; }
+nav ul li a:hover { color: #b88b4a; }
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    color: #fff;
+    position: relative;
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+.hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+.hero button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background: #b88b4a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.hero button:hover { background: #a0773e; }
+
+/* Featured Categories */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 4rem 3rem;
+}
+.category-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.category-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+.category-card:hover img { transform: scale(1.05); }
+.category-card h3 {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Featured Dishes Section */
+.featured-dishes { padding: 4rem 3rem; text-align: center; }
+.featured-dishes h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #b88b4a;
+}
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.dish-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    background: #fff;
+}
+.dish-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.dish-card img { width: 100%; height: 180px; object-fit: cover; }
+.dish-card .info {
+    padding: 1rem;
+}
+.dish-card .info h4 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    color: #b88b4a;
+}
+.dish-card .info p { font-size: 0.95rem; color: #555; }
+
+/* Footer */
+footer {
+    background: #f7f2ec;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1rem; }
+    nav ul { gap: 1rem; }
+}

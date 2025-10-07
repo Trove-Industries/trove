@@ -8,6 +8,10 @@ use axum::{http, Router};
 use tokio::net::TcpListener;
 use tower_http::cors::{AllowOrigin, CorsLayer};
 use tracing_subscriber::fmt::format;
+use crate::routes::menu_router::menu_routes;
+use crate::routes::restaurant_router::restaurant_routes;
+use crate::routes::template_router::template_routes;
+use tower_http::services::ServeDir;
 
 mod config;
 mod db;
@@ -15,6 +19,7 @@ mod routes;
 mod services;
 mod handlers;
 mod models;
+mod utils;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -44,10 +49,13 @@ async fn main() -> anyhow::Result<()> {
 
     tracing::info!("Allowed origins: {:?}", cfg.allowed_origin);
 
+    let static_files_service = ServeDir::new("theme/dev/static");
 
     let app = Router::new()
-        .nest("/menu", routes::menu_router::menu_routes())
-        .nest("/restaurant", routes::restaurant_router::restaurant_routes())
+        .nest("/menu", menu_routes())
+        .nest("/restaurant", restaurant_routes())
+        .nest("/template", template_routes())
+        .nest_service("/static", static_files_service)
         .with_state(pool)
         .layer(cors);
 

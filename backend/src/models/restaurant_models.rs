@@ -7,6 +7,7 @@ pub struct NewRestaurant{
     pub restaurant_name: String,
     pub country: String,
     pub city: String,
+    pub subdomain: Option<String>
 }
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
@@ -15,6 +16,7 @@ pub struct Restaurant{
     pub restaurant_name: String,
     pub country: String,
     pub city: String,
+    pub subdomain: Option<String>
 }
 
 

@@ -1,0 +1,111 @@
+/* Menu Page Fun Theme */
+.menu-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+    color: #fff;
+}
+
+.menu-hero h1 {
+    font-size: 2.5rem;
+}
+
+.menu-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.menu-categories button {
+    background: #fff;
+    color: #ff5f6d;
+    font-weight: bold;
+    border: 2px solid #ff5f6d;
+}
+
+.menu-categories button.active {
+    background: #ff5f6d;
+    color: #fff;
+}
+
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem 4rem;
+}
+
+.menu-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.menu-card .info {
+    padding: 1rem;
+}
+
+.menu-card .info h4 {
+    color: #ff5f6d;
+    margin-bottom: 0.5rem;
+}
+
+.menu-card .info p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    padding: 2rem;
+    text-align: left;
+    position: relative;
+}
+
+.modal-content h3 {
+    color: #ff5f6d;
+    margin-bottom: 1rem;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ff5f6d;
+}
+
+@media(max-width:768px){
+    .menu-hero h1 { font-size: 2rem; }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Trove Luxury Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/backend/themeenu.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Trove</div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Explore Our Menu</h1>
+        <p>Select a category to discover our exquisite dishes.</p>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="categories">
+    <div class="category-card" onclick="showDishes('breakfast')"><h3>Breakfast</h3></div>
+    <div class="category-card" onclick="showDishes('main')"><h3>Main Course</h3></div>
+    <div class="category-card" onclick="showDishes('beverages')"><h3>Beverages</h3></div>
+    <div class="category-card" onclick="showDishes('desserts')"><h3>Desserts</h3></div>
+</section>
+
+<!-- Dishes Section -->
+<section class="dishes" id="dish-section">
+    <div class="dish-card" onclick="openModal('modal1')">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=800&q=80" alt="Dish 1">
+        <div class="dish-info">
+            <h4>Pancakes with Berries</h4>
+            <p>Delicious fluffy pancakes with fresh berries</p>
+            <span>$12</span>
+        </div>
+    </div>
+    <div class="dish-card" onclick="openModal('modal2')">
+        <img src="https://images.unsplash.com/photo-1617196033456-5e2b3a3efae0?auto=format&fit=crop&w=800&q=80" alt="Dish 2">
+        <div class="dish-info">
+            <h4>Classic Eggs Benedict</h4>
+            <p>Perfectly poached eggs with hollandaise sauce</p>
+            <span>$15</span>
+        </div>
+    </div>
+</section>
+
+<!-- Dish Modals -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h3>Pancakes with Berries</h3>
+        <p>Our signature fluffy pancakes served with fresh seasonal berries and maple syrup. Perfect for a luxurious breakfast experience.</p>
+        <p><strong>Ingredients:</strong> Flour, Eggs, Milk, Berries, Maple Syrup</p>
+        <p><strong>Price:</strong> $12</p>
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <h3>Classic Eggs Benedict</h3>
+        <p>Poached eggs with ham and hollandaise sauce on an English muffin. A timeless dish done perfectly.</p>
+        <p><strong>Ingredients:</strong> Eggs, Ham, Muffin, Hollandaise Sauce</p>
+        <p><strong>Price:</strong> $15</p>
+    </div>
+</div>
+
+<!-- Back Button -->
+<button class="back-btn" onclick="showCategories()">Back to Categories</button>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Trove Industries. All rights reserved.
+</footer>
+
+<script src="/backend/themenu.js"></script>
+</body>
+</html>

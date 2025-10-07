@@ -1,0 +1,57 @@
+/* Fun Theme About Page */
+.about-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #ff6b6b, #f0e130);
+    color: #fff;
+}
+
+.about-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-hero p {
+    font-size: 1.2rem;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 4rem 2rem;
+}
+
+.about-content img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.about-content .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-content .text h2 {
+    font-size: 2rem;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+}
+
+.about-content .text p {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+@media(max-width: 768px){
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+}

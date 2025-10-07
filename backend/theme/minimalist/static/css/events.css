@@ -1,0 +1,104 @@
+/* Minimalist Theme Events Page */
+
+.events-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+    color: #222;
+}
+
+.events-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.events-hero p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 3rem 2rem 4rem;
+}
+
+.event-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.event-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.event-card .info {
+    padding: 1rem;
+}
+
+.event-card .info h4 {
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+
+.event-card .info p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Event Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    padding: 2rem;
+    position: relative;
+    text-align: left;
+}
+
+.modal-content h3 {
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.modal-content p {
+    color: #555;
+    line-height: 1.5;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #222;
+}
+
+@media(max-width:768px){
+    .events-hero h1 { font-size: 2rem; }
+}
