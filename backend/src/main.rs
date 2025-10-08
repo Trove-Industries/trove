@@ -12,6 +12,7 @@ use crate::routes::menu_router::menu_routes;
 use crate::routes::restaurant_router::restaurant_routes;
 use crate::routes::template_router::template_routes;
 use tower_http::services::ServeDir;
+use crate::routes::main_router::main_router;
 
 mod config;
 mod db;
@@ -51,11 +52,7 @@ async fn main() -> anyhow::Result<()> {
 
     let static_files_service = ServeDir::new("theme/dev/static");
 
-    let app = Router::new()
-        .nest("/menu", menu_routes())
-        .nest("/restaurant", restaurant_routes())
-        .nest("/template", template_routes())
-        .nest_service("/static", static_files_service)
+    let app = main_router()
         .with_state(pool)
         .layer(cors);
 

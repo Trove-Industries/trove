@@ -5,9 +5,9 @@ use sqlx::FromRow;
 pub struct MenuItem {
     pub id: i32,
     pub food: String,
-    pub description: Option<String>, // Nullable in DB
-    pub price: Option<i32>,          // Nullable in DB
-    pub image: Option<String>,       // Nullable in DB
+    pub description: Option<String>,
+    pub price: Option<i32>,
+    pub image: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]

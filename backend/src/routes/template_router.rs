@@ -1,7 +1,7 @@
 use axum::Router;
 use axum::routing::get;
 use sqlx::PgPool;
-use crate::handlers::template_handler::{generate_menu_template};
+use crate::handlers::template_handler::menu_template_handler::{generate_menu_template};
 
 pub fn template_routes() ->Router<PgPool>{
     Router::new()

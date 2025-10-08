@@ -1,6 +1,6 @@
 use axum::Error;
 use sqlx::{Execute, PgPool};
-use crate::models::template_models::{MenuItems, Restaurant};
+use crate::models::template_models::menu_template_models::{MenuItems, Restaurant};
 
 pub async fn get_restaurant_data(
     pool: &PgPool,
