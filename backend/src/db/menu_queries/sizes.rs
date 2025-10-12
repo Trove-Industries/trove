@@ -47,6 +47,7 @@ pub async fn get_size_query(
             "#
     )
         .bind(restaurant_name)
+        .persistent(false)
         .fetch_all(pool)
         .await?;
     Ok(size)

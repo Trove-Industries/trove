@@ -12,6 +12,7 @@ pub async fn get_restaurant_name_from_domain(
         "#,
     )
         .bind(subdomain)
+        .persistent(false)
         .fetch_optional(pool)
         .await?;
 

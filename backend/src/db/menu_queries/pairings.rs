@@ -47,6 +47,7 @@ pub async fn get_pairing_query(
             "#
     )
         .bind(restaurant_name)
+        .persistent(false)
         .fetch_all(pool)
         .await?;
     Ok(pairing)

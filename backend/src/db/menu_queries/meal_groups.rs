@@ -41,6 +41,7 @@ pub async fn get_meal_group_query(
             "#
     )
         .bind(restaurant_name)
+        .persistent(false)
         .fetch_all(pool)
         .await?;
     Ok(meal_group)

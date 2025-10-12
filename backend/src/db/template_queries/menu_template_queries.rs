@@ -13,8 +13,8 @@ pub async fn get_restaurant_data(
             WHERE subdomain = $1
         "#
     )
-        .persistent(false)
         .bind(restaurant_name)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
 

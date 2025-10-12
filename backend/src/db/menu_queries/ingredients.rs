@@ -48,6 +48,7 @@ pub async fn get_ingredient_query(
             "#
     )
         .bind(restaurant_name)
+        .persistent(false)
         .fetch_all(pool)
         .await?;
     Ok(ingredient)

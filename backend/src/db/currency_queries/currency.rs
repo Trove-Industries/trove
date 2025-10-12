@@ -28,6 +28,7 @@ pub async fn create_currency_query(
         .bind(currency_details.currency_iso)
         .bind(currency_details.currency_symbol)
         .bind(currency_details.currency_rate)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
 
@@ -54,6 +55,7 @@ pub async fn get_currency_by_iso_query(
         "#
     )
         .bind(iso)
+        .persistent(false)
         .fetch_optional(pool)
         .await?;
 
@@ -75,6 +77,7 @@ pub async fn get_all_currencies_query(pool: &PgPool) -> Result<Vec<Currency>, Er
         ORDER BY currency_name ASC
         "#
     )
+        .persistent(false)
         .fetch_all(pool)
         .await?;
 
