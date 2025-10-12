@@ -1,0 +1,1 @@
+pub mod menu_template_service;

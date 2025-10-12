@@ -1,10 +1,11 @@
 use axum::{Router, routing::{get, post}};
 use sqlx::PgPool;
-use crate::handlers::restaurant_handler::{validate_restaurant,register_restaurant};
+use crate::handlers::restaurant_handler::restaurant::{create_restaurant_handler, get_restaurant_handler};
+use crate::handlers::restaurant_handler_::{validate_restaurant, register_restaurant};
 
 // menu_router
 pub fn restaurant_routes() -> Router<PgPool> {
     Router::new()
-        .route("/validate/{restaurant_name}", get(validate_restaurant))
-        .route("/register-restaurant", post(register_restaurant))
+        .route("/create-restaurant", post(create_restaurant_handler))
+        .route("/get-restaurant/{restaurant_name}", get(get_restaurant_handler))
 }

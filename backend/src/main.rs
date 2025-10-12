@@ -21,6 +21,7 @@ mod services;
 mod handlers;
 mod models;
 mod utils;
+mod admin;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -50,7 +51,7 @@ async fn main() -> anyhow::Result<()> {
 
     tracing::info!("Allowed origins: {:?}", cfg.allowed_origin);
 
-    let static_files_service = ServeDir::new("theme/dev/static");
+    let static_files_service = ServeDir::new("theme/minimal/static");
 
     let app = main_router()
         .with_state(pool)

@@ -1,5 +1,4 @@
 use http::Request;
-use tokio::io::AsyncBufReadExt;
 
 pub fn extract_subdomain<B>(req :&Request<B>) -> Option<String>{
 

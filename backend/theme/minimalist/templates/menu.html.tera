@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- SEO Meta Tags -->
+    <title>{{ restaurant[0].restaurant_name }} - Menu | Order Online</title>
+    <meta name="description" content="Browse the menu at {{ restaurant[0].restaurant_name }} in {{ restaurant[0].restaurant_city }}, {{ restaurant[0].restaurant_country }}. Order your favorite meals online with customizable options." />
+    <meta name="keywords" content="{{ restaurant[0].restaurant_name }}, restaurant menu, {{ restaurant[0].restaurant_city }}, {{ restaurant[0].restaurant_country }}, online ordering, food delivery" />
+    <meta name="author" content="{{ restaurant[0].restaurant_name }}" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ restaurant[0].restaurant_name }} - Menu" />
+    <meta property="og:description" content="Browse and order from {{ restaurant[0].restaurant_name }} in {{ restaurant[0].restaurant_city }}" />
+    <meta property="og:type" content="restaurant.menu" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ restaurant[0].restaurant_name }} - Menu" />
+    <meta name="twitter:description" content="Browse and order from {{ restaurant[0].restaurant_name }}" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://{{ restaurant[0].restaurant_subdomain }}.yourdomain.com" />
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<div class="app-wrapper">
+    <div class="app-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div id="restaurant-name" class="restaurant-name">{{ restaurant[0].restaurant_name }}</div>
+            <div class="nav-center" id="categories">
+                {% for category in categories %}
+                <div class="category-item {% if loop.first %}active{% endif %}" data-category-id="{{ category.id }}" data-category-name="{{ category.category_name }}">
+                    <img src="{{ category.category_icon }}" alt="{{ category.category_name }} icon">
+                    <span>{{ category.category_name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="search-btn" class="search-btn">
+                <img src="/static/images/search.svg" alt="Search">
+            </div>
+        </nav>
+
+        <!-- Main layout -->
+        <div class="main-content">
+            <!-- LEFT CONTAINER -->
+            <div class="left-container">
+                <h2 class="section-title">Meal Category</h2>
+
+                <!-- Horizontal list of meal-group buttons -->
+                <div id="meal-categories" class="meal-categories-row"></div>
+
+                <!-- Selected meal detail area -->
+                <div class="selected-meal-area">
+                    <div class="selected-meal-left">
+                        <div class="selected-image-wrap">
+                            <img id="selected-meal-image" class="selected-meal-image" src="" alt="Selected meal image" onerror="this.style.opacity=.45; this.style.filter='grayscale(60%)'">
+                        </div>
+                    </div>
+
+                    <div class="selected-meal-right">
+                        <div id="selected-meal-name" class="selected-meal-name"></div>
+                        <div id="selected-meal-desc" class="selected-meal-desc"></div>
+
+                        <div class="selected-sizes-label">Sizes</div>
+                        <div id="selected-size-buttons" class="size-buttons selected-size-buttons"></div>
+
+                        <!-- Build Your Meal Section -->
+                        <div class="build-your-meal-section">
+                            <div class="build-your-meal-label">Build Your Meal</div>
+                            <div id="ingredients-grid" class="ingredients-grid"></div>
+                        </div>
+
+                        <!-- Quantity and Price Row -->
+                        <div class="selected-price-row">
+                            <div class="selected-qty-controls">
+                                <button id="left-qty-dec" class="qty-btn">−</button>
+                                <div id="left-qty-number" class="qty-number">1</div>
+                                <button id="left-qty-inc" class="qty-btn">+</button>
+                            </div>
+                            <div class="selected-price-value" id="left-price-value">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Pairings section -->
+                <div class="build-meal-section">
+                    <h3 class="build-meal-title">Recommended Pairings</h3>
+                    <div id="selected-pairings" class="pairings-row"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT CONTAINER -->
+            <div class="right-container">
+                <h2 class="section-title">Food</h2>
+                <div id="meal-list" class="meal-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Embed server data as JavaScript -->
+<script>
+window.restaurantData = {
+    name: "{{ restaurant[0].restaurant_name }}",
+    subdomain: "{{ restaurant[0].restaurant_subdomain }}",
+    city: "{{ restaurant[0].restaurant_city }}",
+    country: "{{ restaurant[0].restaurant_country }}",
+    categories: [
+        {% for category in categories %}
+        {
+            id: {{ category.id }},
+            name: "{{ category.category_name }}",
+            icon: "{{ category.category_icon }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ],
+    searchIcon: "/static/images/search.svg"
+};
+
+window.mealGroupsData = {
+    {% for category in categories %}
+    "{{ category.category_name }}": [
+        {% for group in meal_groups %}
+        {% if group.category_id == category.id %}
+        "{{ group.meal_group_name }}"{% if not loop.last %},{% endif %}
+        {% endif %}
+        {% endfor %}
+    ]{% if not loop.last %},{% endif %}
+    {% endfor %}
+};
+
+window.mealsData = {
+    {% for group in meal_groups %}
+    "{{ group.meal_group_name }}": [
+        {% for meal in meals %}
+        {% if meal.meal_group_id == group.id %}
+        {
+            id: "meal-{{ meal.id }}",
+            mealId: {{ meal.id }},
+            food: "{{ meal.meal_name }}",
+            description: "{{ meal.meal_description }}",
+            likes: {{ meal.meal_likes | default(value=0) }},
+            image: "{{ meal.meal_image }}",
+            sizes: [
+                {% for size in sizes %}
+                {% if size.meal_id == meal.id %}
+                { name: "{{ size.size_name }}", price: {{ size.size_price }} }{% if not loop.last %},{% endif %}
+                {% endif %}
+                {% endfor %}
+            ],
+            pairings: [
+                {% for pairing in pairings %}
+                {% if pairing.meal_id == meal.id %}
+                {
+                    name: "{{ pairing.pairing_name }}",
+                    image: "{{ pairing.pairing_image }}",
+                    price: {{ pairing.pairing_price | default(value=0) }}
+                }{% if not loop.last %},{% endif %}
+                {% endif %}
+                {% endfor %}
+            ],
+            ingredients: [
+                {% for ingredient in ingredients %}
+                {% if ingredient.meal_id == meal.id %}
+                {
+                    name: "{{ ingredient.ingredient_name }}",
+                    image: "{{ ingredient.ingredient_image }}"
+                }{% if not loop.last %},{% endif %}
+                {% endif %}
+                {% endfor %}
+            ]
+        }{% if not loop.last %},{% endif %}
+        {% endif %}
+        {% endfor %}
+    ]{% if not loop.last %},{% endif %}
+    {% endfor %}
+};
+</script>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

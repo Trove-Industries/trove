@@ -2,7 +2,7 @@ use tera::{Tera, Context};
 use once_cell::sync::Lazy;
 
 static TERA: Lazy<Tera> = Lazy::new(|| {
-    match Tera::new("theme/dev/templates/**/*") {
+    match Tera::new("theme/minimalist/templates/**/*") {
         Ok(t) => t,
         Err(e) => {
             eprintln!("Template parsing error: {}", e);
