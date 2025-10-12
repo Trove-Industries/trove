@@ -1,4 +1,4 @@
-use sqlx::{Error, Execute, PgPool};
+use sqlx::{Error, PgPool};
 use crate::models::menu_models::categories::{Category, NewCategory};
 
 pub async fn create_category_query(

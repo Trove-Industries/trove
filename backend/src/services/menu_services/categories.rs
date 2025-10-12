@@ -1,4 +1,4 @@
-use sqlx::{Error, PgPool};
+use sqlx::{PgPool};
 use crate::db::menu_queries::categories::{create_category_query, get_categories_query};
 use crate::models::menu_models::categories::{Category, NewCategory};
 

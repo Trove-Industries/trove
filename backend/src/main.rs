@@ -1,17 +1,10 @@
 use anyhow::{Context};
-use axum::handler::Handler;
 use axum::http::{HeaderValue, Method};
 use crate::db::connection::connection_pool;
 use crate::config::config::load_config;
-
-use axum::{http, Router};
+use axum::{http};
 use tokio::net::TcpListener;
 use tower_http::cors::{AllowOrigin, CorsLayer};
-use tracing_subscriber::fmt::format;
-use crate::routes::menu_router::menu_routes;
-use crate::routes::restaurant_router::restaurant_routes;
-use crate::routes::template_router::template_routes;
-use tower_http::services::ServeDir;
 use crate::routes::main_router::main_router;
 
 mod config;
@@ -51,7 +44,6 @@ async fn main() -> anyhow::Result<()> {
 
     tracing::info!("Allowed origins: {:?}", cfg.allowed_origin);
 
-    let static_files_service = ServeDir::new("theme/minimal/static");
 
     let app = main_router()
         .with_state(pool)

@@ -5,7 +5,7 @@ use crate::models::menu_models::meal_groups::MealGroup;
 use crate::models::menu_models::meals::Meal;
 use crate::models::menu_models::pairings::Pairing;
 use crate::models::menu_models::sizes::Size;
-use crate::models::restaurants_models::restaurants::Restaurant;
+pub(crate) use crate::models::restaurants_models::restaurants::Restaurant;
 
 #[derive(Serialize)]
 pub struct FullMenuData {
