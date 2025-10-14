@@ -14,6 +14,7 @@ pub async fn create_init_user(
         "#
     )
         .bind(&init_user.username)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
 
