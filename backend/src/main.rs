@@ -1,10 +1,12 @@
-use anyhow::{Context};
+use std::net::SocketAddr;
+use anyhow::Context;
 use axum::http::{HeaderValue, Method};
-use crate::db::connection::connection_pool;
-use crate::config::config::load_config;
-use axum::{http};
+use axum::http;
 use tokio::net::TcpListener;
 use tower_http::cors::{AllowOrigin, CorsLayer};
+
+use crate::db::connection::connection_pool;
+use crate::config::config::load_config;
 use crate::routes::main_router::main_router;
 
 mod config;
@@ -18,23 +20,23 @@ mod admin;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-
     tracing_subscriber::fmt::init();
 
     let cfg = load_config()?;
-
     let pool = connection_pool(&cfg.database_url)
         .await
-        .context("Failed to connect")?;
-    println!("Connection Successful");
+        .context("❌ Failed to connect to database")?;
+    println!("✅ Database connection successful");
 
-    let origins: Vec<HeaderValue> = cfg.allowed_origin
+    // --- CORS setup ---
+    let origins: Vec<HeaderValue> = cfg
+        .allowed_origin
         .split(',')
-        .map(|s|
+        .map(|s| {
             s.trim()
                 .parse::<HeaderValue>()
-                .with_context(|| format!("Invalid cors origin {}",s))
-        )
+                .with_context(|| format!("Invalid CORS origin: {}", s))
+        })
         .collect::<Result<Vec<_>, _>>()?;
 
     let cors = CorsLayer::new()
@@ -42,23 +44,29 @@ async fn main() -> anyhow::Result<()> {
         .allow_headers([http::header::CONTENT_TYPE])
         .allow_origin(AllowOrigin::list(origins));
 
-    tracing::info!("Allowed origins: {:?}", cfg.allowed_origin);
-
+    tracing::info!("🌍 Allowed origins: {:?}", cfg.allowed_origin);
 
     let app = main_router()
         .with_state(pool)
         .layer(cors);
 
+    // --- Server setup ---
     let port: u16 = std::env::var("PORT")
         .unwrap_or_else(|_| "8000".to_string())
         .parse::<u16>()
-        .context("Port not set correctly")?;
+        .context("❌ Invalid or missing PORT variable")?;
 
-    let addr = format!("0.0.0.0:{}", port);
-    let listener = TcpListener::bind(&addr).await?;
-    tracing::info!("Server running on http://{}", addr);
+    let addr: SocketAddr = format!("0.0.0.0:{}", port)
+        .parse()
+        .context("❌ Failed to parse server address")?;
 
-    axum::serve(listener, app).await?;
+    let listener = TcpListener::bind(addr).await?;
+    tracing::info!("🚀 Server running at http://{}", addr);
+
+    // ✅ Allow handlers to use ConnectInfo<SocketAddr>
+    axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>())
+        .await
+        .context("❌ Server failed to start")?;
 
     Ok(())
 }

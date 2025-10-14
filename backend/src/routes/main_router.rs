@@ -6,6 +6,7 @@ use crate::handlers::template_handler::menu_template_handler::generate_menu_temp
 use crate::routes::currency_router::currency_routes;
 use crate::routes::menu_router::menu_routes;
 use crate::routes::restaurant_router::restaurant_routes;
+use crate::routes::session_router::session_router;
 
 pub fn main_router() -> Router<PgPool> {
     let static_files = ServeDir::new("theme/minimalist/static");
@@ -19,6 +20,7 @@ pub fn main_router() -> Router<PgPool> {
         .nest("/menu", menu_routes())
         .nest("/restaurant", restaurant_routes())
         .nest("/currency", currency_routes())
+        .nest("/session", session_router())
 
         .nest_service("/static", static_files)
 }
