@@ -17,6 +17,7 @@ pub async fn create_restaurant_query(
         .bind(&restaurant_details.restaurant_country)
         .bind(&restaurant_details.restaurant_city)
         .bind(&restaurant_details.restaurant_subdomain)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
 

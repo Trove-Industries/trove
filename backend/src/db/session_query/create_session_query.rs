@@ -22,6 +22,7 @@ pub async fn create_new_session(pool: &PgPool, new_session: NewSession) -> Resul
         .bind(expires_at)
         .bind(new_session.ip_address)
         .bind(new_session.user_agent)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
 

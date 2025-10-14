@@ -1,4 +1,4 @@
-use sqlx::{Error, PgPool};
+use sqlx::{Error, Execute, PgPool};
 use sqlx::types::Uuid;
 use crate::models::user_models::user::{InitUser, User};
 
@@ -42,6 +42,7 @@ pub async fn verify_user(
         .bind(supabase_uid)
         .bind(email)
         .bind(user_id)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
     Ok(verified_user)
@@ -55,6 +56,7 @@ pub async fn cleanup_expired_users(
                 DELETE FROM users WHERE is_verified = FALSE AND expires_at < NOW()
              "#
     )
+        .persistent(false)
         .execute(pool)
         .await?;
 
