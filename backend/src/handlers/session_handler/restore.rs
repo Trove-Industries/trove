@@ -50,6 +50,7 @@ pub async fn restore_session_handler(
         "#
     )
         .bind(&session_token)
+        .persistent(false)
         .fetch_one(&pool)
         .await
     {
@@ -77,6 +78,7 @@ pub async fn restore_session_handler(
         "#
     )
         .bind(user_id)
+        .persistent(false)
         .fetch_one(&pool)
         .await
     {
@@ -117,6 +119,7 @@ pub async fn restore_session_handler(
         "#
     )
         .bind(user_id)
+        .persistent(false)
         .fetch_one(&pool)
         .await
         .unwrap_or(0) > 0;

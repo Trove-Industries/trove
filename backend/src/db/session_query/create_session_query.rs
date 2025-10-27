@@ -17,6 +17,7 @@ pub async fn create_session_query(
         .bind(new_session.expires_at)
         .bind(new_session.ip_address)
         .bind(new_session.user_agent)
+        .persistent(false)
         .fetch_one(pool)
         .await?;
 

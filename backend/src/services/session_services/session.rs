@@ -85,6 +85,7 @@ pub async fn validate_session(pool: &PgPool, token: &Uuid) -> Result<Option<Sess
 pub async fn deactivate_session(pool: &PgPool, token: &Uuid) -> Result<()> {
     sqlx::query("UPDATE sessions SET is_active = FALSE WHERE session_token = $1")
         .bind(token)
+        .persistent(false)
         .execute(pool)
         .await?;
     Ok(())
