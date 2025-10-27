@@ -10,7 +10,6 @@ use crate::db::connection::connection_pool;
 use crate::config::config::load_config;
 // use crate::middleware::session_layer::SessionLayer;
 use crate::routes::main_router::main_router;
-use crate::services::session_services::cleanup::start_session_cleanup_task;
 use crate::state::AppState;
 use crate::utils::supabase_client::SupabaseClient;
 
@@ -35,7 +34,7 @@ async fn main() -> anyhow::Result<()> {
         .context(" Failed to connect to database")?;
     println!("✅ Database connection successful");
 
-    start_session_cleanup_task(pool.clone()).await;
+    // start_session_cleanup_task(pool.clone()).await;
 
     let supabase = SupabaseClient::new();
 

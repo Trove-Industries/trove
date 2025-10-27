@@ -1,6 +1,5 @@
 use sqlx::PgPool;
 use crate::db::menu_queries::meal_groups::{create_meal_group_query, get_meal_group_by_session_query, get_meal_group_by_subdomain_query};
-use crate::models::menu_models::categories::CategorySessionResponse;
 use crate::models::menu_models::meal_groups::{MealGroup, NewMealGroup};
 
 pub async fn create_meal_groups_service(

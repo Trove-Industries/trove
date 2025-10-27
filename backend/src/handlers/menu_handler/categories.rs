@@ -1,7 +1,7 @@
 use axum::extract::{Path, State};
 use axum::Json;
 use axum_extra::extract::CookieJar;
-use http::{Request, StatusCode};
+use http::{StatusCode};
 use serde_json::json;
 use sqlx::PgPool;
 use tracing::{error, info};

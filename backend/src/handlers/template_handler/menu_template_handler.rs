@@ -3,12 +3,10 @@ use axum::extract::{State};
 use axum::response::{Html, IntoResponse};
 use axum_extra::extract::CookieJar;
 use http::{Request, StatusCode};
-use sqlx::PgPool;
 use crate::db::domains::subdomain::get_restaurant_name_from_domain;
 use crate::services::template_services::menu_template_services::menu_template_service::get_full_menu_data;
 use crate::state::AppState;
 use crate::utils::domains::extract_subdomain;
-use crate::utils::get_id::get_restaurant_id;
 use crate::utils::tera_engine::render_template;
 
 
