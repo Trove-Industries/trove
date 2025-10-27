@@ -1,4 +1,4 @@
-use sqlx::{Error, Execute, PgPool};
+use sqlx::{Error, PgPool};
 use crate::models::menu_models::sizes::{NewSize, Size};
 
 pub async fn create_size_query(

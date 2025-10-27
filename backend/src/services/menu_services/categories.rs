@@ -1,5 +1,4 @@
 use sqlx::{PgPool};
-use uuid::Uuid;
 use crate::db::menu_queries::categories::{create_category_query, get_categories_by_subdomain_query, get_category_by_session_query};
 use crate::models::menu_models::categories::{Category, CategorySessionResponse, NewCategory};
 

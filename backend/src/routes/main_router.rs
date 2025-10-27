@@ -1,6 +1,5 @@
 use axum::Router;
 use axum::routing::get;
-use sqlx::PgPool;
 use tower_http::services::ServeDir;
 use crate::handlers::template_handler::menu_template_handler::generate_menu_template;
 use crate::routes::admin_router::admin_router;
@@ -8,7 +7,6 @@ use crate::routes::auth_router::auth_routes;
 use crate::routes::currency_router::currency_routes;
 use crate::routes::menu_router::menu_routes;
 use crate::routes::restaurant_router::restaurant_routes;
-use crate::routes::session_router::session_router;
 use crate::state::AppState;
 
 pub fn main_router() -> Router<AppState> {

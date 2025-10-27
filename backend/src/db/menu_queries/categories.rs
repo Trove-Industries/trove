@@ -1,5 +1,4 @@
 use sqlx::{Error, PgPool};
-use uuid::Uuid;
 use crate::models::menu_models::categories::{Category, CategorySessionResponse, NewCategory};
 
 pub async fn create_category_query(

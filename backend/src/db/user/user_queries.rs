@@ -1,4 +1,4 @@
-use sqlx::{Error, Execute, PgPool};
+use sqlx::{Error, PgPool};
 use sqlx::types::Uuid;
 use crate::models::user_models::user::{InitUser, User};
 

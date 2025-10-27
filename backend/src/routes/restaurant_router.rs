@@ -1,5 +1,4 @@
 use axum::{Router, routing::{get, post}};
-use sqlx::PgPool;
 use crate::handlers::restaurant_handler::restaurant::{create_restaurant_handler, get_restaurant_by_session_handler, get_restaurant_handler};
 use crate::state::AppState;
 

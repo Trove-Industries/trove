@@ -1,6 +1,5 @@
 use axum::Router;
 use axum::routing::{get, post};
-use sqlx::PgPool;
 use crate::handlers::currency_handler::currency::{create_currency_handler, get_all_currencies_handler, get_currency_by_iso_handler};
 use crate::state::AppState;
 

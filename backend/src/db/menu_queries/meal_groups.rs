@@ -1,4 +1,4 @@
-use sqlx::{Error, Execute, PgPool};
+use sqlx::{Error, PgPool};
 use crate::models::menu_models::meal_groups::{MealGroup, NewMealGroup};
 
 pub async fn create_meal_group_query(

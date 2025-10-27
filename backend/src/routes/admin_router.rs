@@ -1,6 +1,5 @@
-use axum::{Router, routing::post};
+use axum::{Router};
 use axum::routing::get;
-use sqlx::PgPool;
 use crate::admin::admin_handler::admin_handler::get_all_users_handler;
 use crate::state::AppState;
 

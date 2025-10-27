@@ -1,5 +1,4 @@
 use axum::{Router, routing::{get, post}};
-use sqlx::PgPool;
 use crate::handlers::menu_handler::categories::{create_category_handler, get_category_by_session_handler, get_category_by_subdomain_handler};
 use crate::handlers::menu_handler::ingredients::{create_ingredient_handler, get_ingredient_by_session_handler, get_ingredient_by_subdomain_handler};
 use crate::handlers::menu_handler::meal_groups::{create_meal_group_handler, get_meal_group_by_session_handler, get_meal_group_by_subdomain_handler};
