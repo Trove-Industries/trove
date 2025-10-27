@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Meal | Trove</title>
+    <link rel="stylesheet" href="menu_add_meal.css">
+</head>
+<body>
+<nav class="navbar">
+    <h1 id="restaurant-name" class="nav-title">Loading restaurant...</h1>
+</nav>
+
+<main class="container">
+    <div class="card">
+        <div class="left-panel">
+            <h2>Existing Meals</h2>
+            <div id="meals-list" class="list">
+                <p class="placeholder">No meals loaded yet.</p>
+            </div>
+            <button id="next-button" class="btn hidden">Next ➜</button>
+        </div>
+
+        <div class="right-panel">
+            <h2>Add New Meal</h2>
+            <div id="message" class="message"></div>
+
+            <form id="meal-form">
+                <div class="form-control">
+                    <label for="meal-group-select">Select Meal Group</label>
+                    <select id="meal-group-select" required>
+                        <option value="">Loading meal groups...</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label for="meal-name">Meal Name</label>
+                    <input type="text" id="meal-name" placeholder="e.g. Pasta Rotini" required>
+                </div>
+
+                <div class="form-control">
+                    <label for="meal-description">Description</label>
+                    <textarea id="meal-description" placeholder="Describe this meal..." required></textarea>
+                </div>
+
+                <div class="form-control">
+                    <label for="meal-image">Image File Name</label>
+                    <input type="text" id="meal-image" placeholder="e.g. food.png" required>
+                </div>
+
+                <button type="submit" class="btn">Add Meal</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script src="menu_add_meal.js"></script>
+</body>
+</html>

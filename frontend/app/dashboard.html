@@ -3,16 +3,51 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Dashboard | Trove</title>
+    <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-<h1>Dashboard</h1>
-<div class="card">
-    <a href="add-menu.html"><button>Add Menu Item</button></a>
-    <a href="view-menus.html"><button>View Menus</button></a>
-</div>
+<header>
+    <h1 id="restaurant-name">🍴 Loading...</h1>
+    <button id="logout-btn">Logout</button>
+</header>
 
-<script type="module" src="./js/dashboard.js"></script>
+<main>
+    <section class="welcome">
+        <h2>Welcome to your Dashboard</h2>
+        <p>Manage your restaurant’s menu, ingredients, and pairings in one place.</p>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3 id="total-categories">0</h3>
+            <p>Categories</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="total-meal-groups">0</h3>
+            <p>Meal Groups</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="total-meals">0</h3>
+            <p>Meals</p>
+        </div>
+        <div class="stat-card">
+            <h3 id="total-ingredients">0</h3>
+            <p>Ingredients</p>
+        </div>
+    </section>
+
+    <section class="actions">
+        <h2>Quick Actions</h2>
+        <div class="buttons">
+            <button onclick="window.location.href='create_category.html'">➕ Add Category</button>
+            <button onclick="window.location.href='create_meal_group.html'">🍛 Add Meal Group</button>
+            <button onclick="window.location.href='create_meal.html'">🍽️ Add Meal</button>
+            <button onclick="window.location.href='create_ingredient.html'">🥕 Add Ingredient</button>
+        </div>
+    </section>
+</main>
+
+<script src="dashboard.js"></script>
 </body>
 </html>

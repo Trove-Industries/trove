@@ -3,25 +3,19 @@ use crate::models::menu_models::meals::{Meal, NewMeal};
 
 pub async fn create_meal_query(
     pool: &PgPool,
+    meal_group_id: i32,
+    restaurant_id: i32,
     new_meal: NewMeal,
-) ->Result<Meal, Error>{
-    let new_meal = sqlx::query_as::<_,Meal>(
+) -> Result<Meal, Error> {
+    let new_meal = sqlx::query_as::<_, Meal>(
         r#"
-                INSERT INTO meals(meal_group_id, restaurant_id, meal_name, meal_description, meal_image)
-                VALUES (
-                        (SELECT mg.id
-                        FROM meal_groups mg
-                        JOIN categories c ON mg.category_id = c.id
-                        WHERE c.category_name ILIKE $2 AND mg.meal_group_name ILIKE $3),
-                        (SELECT r.id FROM restaurants r WHERE r.restaurant_name ILIKE $1),
-                        $4, $5, $6
-                )
-                RETURNING id, meal_group_id, restaurant_id, meal_name, meal_description, meal_likes, meal_image
-            "#
+        INSERT INTO meals(meal_group_id, restaurant_id, meal_name, meal_description, meal_likes, meal_image)
+        VALUES ($1,$2, $3, $4, 0, $5)
+        RETURNING id, meal_group_id, restaurant_id, meal_name, meal_description, meal_likes, meal_image
+        "#
     )
-        .bind(new_meal.restaurant_name)
-        .bind(new_meal.category_name)
-        .bind(new_meal.meal_group_name)
+        .bind(meal_group_id)
+        .bind(restaurant_id)
         .bind(new_meal.meal_name)
         .bind(new_meal.meal_description)
         .bind(new_meal.meal_image)
@@ -30,8 +24,7 @@ pub async fn create_meal_query(
         .await?;
     Ok(new_meal)
 }
-
-pub async fn get_meal_query(
+pub async fn get_meal_by_subdomain_query(
     pool: &PgPool,
     restaurant_name: &String
 )->Result<Vec<Meal>, Error>{
@@ -44,6 +37,24 @@ pub async fn get_meal_query(
             "#
     )
         .bind(restaurant_name)
+        .persistent(false)
+        .fetch_all(pool)
+        .await?;
+    Ok(meal)
+}
+
+pub async fn get_meal_by_session_query(
+    pool: &PgPool,
+    restaurant_id: i32,
+)->Result<Vec<Meal>, Error>{
+    let meal = sqlx::query_as::<_,Meal>(
+        r#"
+                SELECT id, meal_group_id, restaurant_id, meal_name, meal_description, meal_likes, meal_image
+                FROM meals
+                WHERE restaurant_id = $1
+            "#
+    )
+        .bind(restaurant_id)
         .persistent(false)
         .fetch_all(pool)
         .await?;

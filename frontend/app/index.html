@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trove App</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Create Restaurant | Trove</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>Welcome to Trove</h1>
-<div class="card">
-    <a href="register.html"><button>Register Restaurant</button></a>
-    <a href="login.html"><button>Login</button></a>
+<div class="container">
+    <h1>Create Your Restaurant</h1>
+
+    <form id="restaurant-form">
+        <label for="name">Restaurant Name</label>
+        <input type="text" id="name" placeholder="e.g. Trove" required />
+
+        <label for="country">Country</label>
+        <input type="text" id="country" placeholder="e.g. Kenya" required />
+
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="e.g. Nairobi" required />
+
+        <label for="subdomain">Subdomain</label>
+        <input type="text" id="subdomain" placeholder="e.g. trove" required />
+
+        <button type="submit">Create Restaurant</button>
+    </form>
+
+    <div id="message"></div>
+
+    <button id="next-button" class="next-button">
+        Next: Add Menu Categories →
+    </button>
 </div>
+
+<script src="app.js"></script>
 </body>
 </html>

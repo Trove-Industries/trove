@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trove Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar">
+    <h1>Trove Admin Dashboard</h1>
+</nav>
+
+<main>
+    <section class="table-section">
+        <h2>All Users</h2>
+        <div id="loader">Loading users...</div>
+        <table id="users-table" class="hidden">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Verified</th>
+                <th>Created At</th>
+                <th>Last Seen</th>
+            </tr>
+            </thead>
+            <tbody id="users-body"></tbody>
+        </table>
+        <p id="error-msg" class="error hidden"></p>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

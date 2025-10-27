@@ -12,8 +12,7 @@ pub struct Ingredient{
 
 #[derive(Debug,Deserialize,Serialize,FromRow)]
 pub struct NewIngredient{
-    pub restaurant_name: String,
-    pub meal_name: String,
+    pub meal_id: i32,
     pub ingredient_name: String,
     pub ingredient_image: Option<String>,
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Meal Pairings | Trove</title>
+    <link rel="stylesheet" href="menu_add_pairing.css" />
+</head>
+<body>
+<header>
+    <h1 id="restaurant-name">🍴 Restaurant</h1>
+</header>
+
+<main>
+    <section class="form-section">
+        <h2>Add a Meal Pairing</h2>
+        <form id="pairing-form">
+            <label for="meal-select">Choose Meal:</label>
+            <select id="meal-select" required>
+                <option value="" disabled selected>Loading meals...</option>
+            </select>
+
+            <label for="pairing-name">Pairing Name:</label>
+            <input id="pairing-name" type="text" placeholder="e.g., Tomato Sauce" required />
+
+            <label for="pairing-image">Pairing Image:</label>
+            <input id="pairing-image" type="text" placeholder="e.g., tomato.png" />
+
+            <label for="pairing-price">Pairing Price (Ksh):</label>
+            <input id="pairing-price" type="number" placeholder="e.g., 200" required />
+
+            <button type="submit">Add Pairing</button>
+        </form>
+        <div id="message" class="message"></div>
+    </section>
+
+    <section class="list-section">
+        <h2>Existing Pairings</h2>
+        <div id="pairings-list"></div>
+    </section>
+
+    <button id="continue-button" class="continue-btn hidden">Next: Add Ingredients ➡️</button>
+</main>
+
+<script src="menu_add_pairing.js"></script>
+</body>
+</html>

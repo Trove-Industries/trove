@@ -4,3 +4,4 @@ pub mod restaurants_models;
 pub mod currency_models;
 pub mod user_models;
 pub mod session_models;
+pub mod auth_models;

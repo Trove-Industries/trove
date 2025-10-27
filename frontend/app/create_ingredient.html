@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Meal Ingredients | Trove</title>
+    <link rel="stylesheet" href="create_ingredient.css" />
+</head>
+<body>
+<header>
+    <h1 id="restaurant-name">🍴 Restaurant</h1>
+</header>
+
+<main>
+    <section class="form-section">
+        <h2>Add a Meal Ingredient</h2>
+        <form id="ingredient-form">
+            <label for="meal-select">Choose Meal:</label>
+            <select id="meal-select" required>
+                <option value="" disabled selected>Loading meals...</option>
+            </select>
+
+            <label for="ingredient-name">Ingredient Name:</label>
+            <input id="ingredient-name" type="text" placeholder="e.g., Tomato" required />
+
+            <label for="ingredient-image">Ingredient Image:</label>
+            <input id="ingredient-image" type="text" placeholder="e.g., tomato.png" />
+
+            <button type="submit">Add Ingredient</button>
+        </form>
+        <div id="message" class="message"></div>
+    </section>
+
+    <section class="list-section">
+        <h2>Existing Ingredients</h2>
+        <div id="ingredients-list"></div>
+    </section>
+
+    <button id="finish-button" class="continue-btn hidden">✅ Finish Setup</button>
+</main>
+
+<script src="create_ingredient.js"></script>
+</body>
+</html>

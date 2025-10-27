@@ -3,28 +3,19 @@ use crate::models::menu_models::pairings::{NewPairing, Pairing};
 
 pub async fn create_pairing_query(
     pool: &PgPool,
+    meal_id: i32,
+    restaurant_id: i32,
     new_pairing: NewPairing
 )->Result<Pairing, Error>{
     let new_pairing = sqlx::query_as::<_,Pairing>(
         r#"
                 INSERT INTO pairings(meal_id, restaurant_id, pairing_name, pairing_image, pairing_price)
-                VALUES (
-                    (
-                        SELECT m.id
-                        FROM meals m
-                        JOIN restaurants r ON m.restaurant_id = r.id
-                        WHERE m.meal_name ILIKE $2 AND r.restaurant_name ILIKE $1
-                    ),
-                    (
-                        SELECT r.id FROM restaurants r WHERE r.restaurant_name ILIKE $1
-                    ),
-                    $3, $4, $5
-                )
+                VALUES ($1, $2, $3, $4, $5)
                 RETURNING id, meal_id, restaurant_id, pairing_name, pairing_image, pairing_price
             "#
     )
-        .bind(new_pairing.restaurant_name)
-        .bind(new_pairing.meal_name)
+        .bind(meal_id)
+        .bind(restaurant_id)
         .bind(new_pairing.pairing_name)
         .bind(new_pairing.pairing_image)
         .bind(new_pairing.pairing_price)
@@ -34,7 +25,7 @@ pub async fn create_pairing_query(
     Ok(new_pairing)
 }
 
-pub async fn get_pairing_query(
+pub async fn get_pairing_by_subdomain_query(
     pool: &PgPool,
     restaurant_name: &String,
 )->Result<Vec<Pairing>, Error>{
@@ -51,5 +42,23 @@ pub async fn get_pairing_query(
         .fetch_all(pool)
         .await?;
     Ok(pairing)
+}
+
+pub async fn get_pairing_by_session_query(
+    pool: &PgPool,
+    restaurant_id: i32,
+)->Result<Vec<Pairing>, Error>{
+    let pairings = sqlx::query_as::<_,Pairing>(
+        r#"
+                SELECT id, meal_id, restaurant_id, pairing_name, pairing_image, pairing_price
+                FROM pairings
+                WHERE restaurant_id = $1
+            "#
+    )
+        .bind(restaurant_id)
+        .persistent(false)
+        .fetch_all(pool)
+        .await?;
+    Ok(pairings)
 }
 

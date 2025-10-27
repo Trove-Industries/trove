@@ -1,21 +1,20 @@
 use sqlx::{Error, PgPool};
-use crate::models::menu_models::categories::{Category, NewCategory};
+use uuid::Uuid;
+use crate::models::menu_models::categories::{Category, CategorySessionResponse, NewCategory};
 
 pub async fn create_category_query(
     pool: &PgPool,
+    restaurant_id: i32,
     new_category: NewCategory,
 ) ->Result<Category, Error> {
     let new_category = sqlx::query_as::<_,Category>(
         r#"
                 INSERT INTO categories (restaurant_id, category_name, category_icon)
-                VALUES (
-                        (SELECT id FROM restaurants WHERE restaurant_name = $1),
-                        $2, $3
-                )
+                VALUES ($1, $2, $3)
                 RETURNING id, restaurant_id, category_name, category_icon
             "#
     )
-        .bind(new_category.restaurant_name)
+        .bind(restaurant_id)
         .bind(new_category.category_name)
         .bind(new_category.category_icon)
         .persistent(false)
@@ -24,7 +23,7 @@ pub async fn create_category_query(
     Ok(new_category)
 }
 
-pub async fn get_categories_query(
+pub async fn get_categories_by_subdomain_query(
     pool: &PgPool,
     restaurant_name: &String,
 )->Result<Vec<Category>, Error>{
@@ -43,4 +42,20 @@ pub async fn get_categories_query(
     Ok(categories)
 }
 
-
+pub async fn get_category_by_session_query(
+    pool: &PgPool,
+    restaurant_id: i32,
+) ->Result<Vec<CategorySessionResponse>, Error>{
+    let categories = sqlx::query_as::<_,CategorySessionResponse>(
+        r#"
+                SELECT id, category_name, category_icon
+                FROM categories
+                WHERE restaurant_id = $1
+            "#
+    )
+        .bind(restaurant_id)
+        .persistent(false)
+        .fetch_all(pool)
+        .await?;
+    Ok(categories)
+}

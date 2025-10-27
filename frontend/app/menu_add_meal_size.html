@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Meal Size | Trove</title>
+    <link rel="stylesheet" href="menu_add_meal_size.css">
+</head>
+<body>
+<nav class="navbar">
+    <h1 id="restaurant-name" class="nav-title">Loading restaurant...</h1>
+</nav>
+
+<main class="container">
+    <div class="card">
+        <!-- LEFT: Existing Meal Sizes -->
+        <div class="left-panel">
+            <h2>Existing Meal Sizes</h2>
+            <div id="meal-sizes-list" class="list">
+                <p class="placeholder">No meal sizes loaded yet.</p>
+            </div>
+            <button id="next-button" class="btn hidden">Next ➜</button>
+        </div>
+
+        <!-- RIGHT: Add New Meal Size -->
+        <div class="right-panel">
+            <h2>Add New Meal Size</h2>
+            <div id="message" class="message"></div>
+
+            <form id="meal-size-form">
+                <div class="form-control">
+                    <label for="meal-select">Select Meal</label>
+                    <select id="meal-select" required>
+                        <option value="">Loading meals...</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label for="size-name">Size Name</label>
+                    <input type="text" id="size-name" placeholder="e.g. Small" required>
+                </div>
+
+                <div class="form-control">
+                    <label for="size-price">Size Price (Ksh)</label>
+                    <input type="number" id="size-price" placeholder="e.g. 200" required>
+                </div>
+
+                <button type="submit" class="btn">Add Meal Size</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script src="menu_add_meal_size.js"></script>
+</body>
+</html>

@@ -5,3 +5,4 @@ pub mod currency_queries;
 pub mod domains;
 pub mod user;
 pub mod session_query;
+pub mod auth_queries;

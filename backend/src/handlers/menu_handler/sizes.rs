@@ -1,25 +1,78 @@
 use axum::extract::{Path, State};
 use axum::Json;
+use axum_extra::extract::CookieJar;
+use http::StatusCode;
+use serde_json::json;
 use sqlx::PgPool;
 use crate::models::menu_models::sizes::{NewSize, Size};
-use crate::services::menu_services::sizes::{create_sizes_service, get_size_service};
+use crate::services::menu_services::sizes::{create_sizes_service, get_size_by_subdomain_service, get_size_by_session_service};
+use crate::state::AppState;
+use crate::utils::get_id::get_restaurant_id;
 
 pub async fn create_size_handler(
-    State(pool): State<PgPool>,
+    State(state): State<AppState>,
+    jar: CookieJar,
     Json(new_size): Json<NewSize>
-)->Result<Json<Size>, (axum::http::StatusCode, String)>{
-    let size = create_sizes_service(&pool, new_size)
+)->Result<Json<Size>, (StatusCode, Json<serde_json::Value>)>{
+    let pool = state.pool;
+    
+    let restaurant_id = get_restaurant_id(&pool, &jar).await?;
+    
+    let size = create_sizes_service(&pool, new_size.meal_id, restaurant_id, new_size)
         .await
-        .map_err(|e| (axum::http::StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        .map_err(|e| {
+            tracing::error!("❌ Failed to create size: {:?}", e);
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({
+                    "error": "Failed to create size",
+                    "details": e.to_string()
+                }))
+            )
+        })?;
     Ok(Json(size))
 }
 
-pub async fn get_size_handler(
-    State(pool): State<PgPool>,
+pub async fn get_size_by_subdomain_handler(
+    State(state): State<AppState>,
     Path(restaurant_name): Path<String>
-)->Result<Json<Vec<Size>>, (axum::http::StatusCode, String)>{
-    let size = get_size_service(&pool, &restaurant_name)
+)->Result<Json<Vec<Size>>, (StatusCode, Json<serde_json::Value>)>{
+    let pool = state.pool;
+    
+    let size = get_size_by_subdomain_service(&pool, &restaurant_name)
         .await
-        .map_err(|e|(axum::http::StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        .map_err(|e| {
+            tracing::error!("❌ Failed to get size: {:?}", e);
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({
+                    "error": "Failed to get size",
+                    "details": e.to_string()
+                }))
+            )
+        })?;
+    Ok(Json(size))
+}
+
+pub async fn get_size_by_session_handler(
+    State(state): State<AppState>,
+    jar: CookieJar,
+)->Result<Json<Vec<Size>>, (StatusCode, Json<serde_json::Value>)>{
+    let pool = state.pool;
+    
+    let restaurant_id = get_restaurant_id(&pool, &jar).await?;
+    
+    let size = get_size_by_session_service(&pool, restaurant_id)
+        .await
+        .map_err(|e| {
+            tracing::error!("❌ Failed to get size: {:?}", e);
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({
+                    "error": "Failed to get size",
+                    "details": e.to_string()
+                }))
+            )
+        })?;
     Ok(Json(size))
 }

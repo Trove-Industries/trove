@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Meal Group | Trove</title>
+    <link rel="stylesheet" href="menu_add_meal_group.css" />
+</head>
+<body>
+<nav class="navbar">
+    <h1 id="restaurant-name" class="nav-title">Loading restaurant...</h1>
+</nav>
+
+<main class="container">
+    <div class="card">
+        <!-- Left side: Meal groups -->
+        <div class="left-panel">
+            <h2>Existing Meal Groups</h2>
+            <div id="meal-groups-list" class="list">
+                <p class="placeholder">No meal groups loaded yet.</p>
+            </div>
+            <button id="continue-button" class="btn hidden">Continue ➜</button>
+        </div>
+
+        <!-- Right side: Add new group -->
+        <div class="right-panel">
+            <h2>Add New Meal Group</h2>
+            <div id="message" class="message"></div>
+
+            <form id="meal-group-form" novalidate>
+                <div class="form-control">
+                    <label for="category-select">Select Category</label>
+                    <select id="category-select" required>
+                        <option value="" disabled selected>Loading categories...</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label for="meal-group-name">Meal Group Name</label>
+                    <input
+                            type="text"
+                            id="meal-group-name"
+                            placeholder="e.g. Starters"
+                            required
+                    />
+                </div>
+
+                <button type="submit" class="btn">Add Meal Group</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script src="menu_add_meal_group.js"></script>
+</body>
+</html>

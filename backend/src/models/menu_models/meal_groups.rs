@@ -11,7 +11,6 @@ pub struct MealGroup{
 
 #[derive(Debug,Deserialize,Serialize,FromRow)]
 pub struct NewMealGroup{
-    pub category_name: String,
-    pub restaurant_name: String,
+    pub category_id: i32,
     pub meal_group_name: String
 }

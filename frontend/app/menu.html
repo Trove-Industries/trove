@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Menu Categories | Trove</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="menu.css" />
+</head>
+<body>
+<div class="container menu-container">
+    <div class="header">
+        <h1>Add Menu Categories</h1>
+        <p class="subtitle" id="restaurant-name">Loading restaurant...</p>
+    </div>
+
+    <form id="category-form">
+        <label for="category-name">Category Name</label>
+        <input
+                type="text"
+                id="category-name"
+                placeholder="e.g. Appetizers, Main Course, Desserts"
+                required
+        />
+
+        <label for="category-icon">Category Icon (Emoji or Text)</label>
+        <input
+                type="text"
+                id="category-icon"
+                placeholder="e.g. 🍕, 🍔, 🥗"
+                maxlength="10"
+        />
+
+        <button type="submit">Add Category</button>
+    </form>
+
+    <div id="message"></div>
+
+    <div class="categories-section">
+        <h2>Added Categories</h2>
+        <div id="categories-list" class="categories-list">
+            <p class="empty-state">No categories added yet. Add your first category above!</p>
+        </div>
+    </div>
+
+    <div class="navigation-buttons">
+        <button type="button" class="secondary-button" onclick="window.location.href='index.html'">
+            ← Back to Restaurant
+        </button>
+        <button type="button" id="continue-button" class="next-button" style="display: none;">
+            Continue to Meal Groups →
+        </button>
+    </div>
+</div>
+
+<script src="menu.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
-
+use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct Restaurant {
@@ -29,3 +29,12 @@ pub struct RestaurantDetails {
     pub restaurant_subdomain: String,
 }
 
+#[derive(Debug, Serialize, Deserialize, FromRow)]
+pub struct RestaurantSessionQuery {
+    pub session: Uuid,
+}
+
+#[derive(Debug, Serialize, Deserialize, FromRow)]
+pub struct RestaurantIdBySession {
+    pub id: i32,
+}

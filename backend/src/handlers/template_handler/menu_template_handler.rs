@@ -1,18 +1,24 @@
 use axum::body::Body;
 use axum::extract::{State};
 use axum::response::{Html, IntoResponse};
+use axum_extra::extract::CookieJar;
 use http::{Request, StatusCode};
 use sqlx::PgPool;
 use crate::db::domains::subdomain::get_restaurant_name_from_domain;
 use crate::services::template_services::menu_template_services::menu_template_service::get_full_menu_data;
+use crate::state::AppState;
 use crate::utils::domains::extract_subdomain;
+use crate::utils::get_id::get_restaurant_id;
 use crate::utils::tera_engine::render_template;
 
 
 pub async fn generate_menu_template(
-    State(pool): State<PgPool>,
+    State(state): State<AppState>,
+    jar: CookieJar,
     req: Request<Body>
 ) -> Result<impl IntoResponse,(StatusCode,String)> {
+    
+    let pool = state.pool;
 
     let subdomain = extract_subdomain(&req).unwrap_or_else(|| "default".to_string());
 
@@ -21,7 +27,7 @@ pub async fn generate_menu_template(
         .unwrap_or(None)
         .unwrap_or_else(|| "default".to_string());
 
-    let full_data = get_full_menu_data(&pool, &restaurant_name)
+    let full_data = get_full_menu_data(&pool, &restaurant_name,)
         .await
         .map_err(|(status, msg)| {
             eprintln!("Error fetching full menu data: {}", msg);
