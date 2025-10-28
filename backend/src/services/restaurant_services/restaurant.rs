@@ -36,7 +36,7 @@ pub async fn create_restaurant_service(
     cookie.set_same_site(SameSite::Lax);
     cookie.set_path("/");
     // TODO set to true in deployment
-    cookie.set_secure(false);
+    cookie.set_secure(true);
 
 
     // Step 2: Create restaurant
